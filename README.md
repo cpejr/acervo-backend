@@ -52,8 +52,8 @@
 
   **-> services**
 
-  - Pasta em que colocaremos os arquivos em que serão implementadas um conjunto de funções a serem realizadas e controladas pelos respectivos controllers.
-  - Para cada entidade em que se avalia necessário realizar requisições de cenários CRUD, é criado um arquivo na pasta services.
+  - Pasta em que colocaremos os arquivos em que serão realizadas a interação das entidades com o banco de dados.
+  - Para cada entidade em que se avalia necessário realizar a comunicação como banco de dados, é criado um arquivo específico para tal.
 
   **-> utils**
 
