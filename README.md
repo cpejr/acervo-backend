@@ -64,5 +64,3 @@
 * [Prettier](https://prettier.io/docs/en/index.html 'Prettier') -> Ferramenta utilizada para a formatação e estilização do código.
 * [DotEnv](https://www.npmjs.com/package/dotenv 'DotEnv') -> Ferramenta de armazenamento de variáveis sensíveis, fazendo estas não irem para o git.
 * [Nodemailer](https://nodemailer.com/about/ 'Nodemailer') -> Ferramenta utilizada para envio de emails.
-
-[Diagrama UML]()
