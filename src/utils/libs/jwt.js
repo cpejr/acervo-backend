@@ -1,0 +1,26 @@
+import jwt from 'jsonwebtoken';
+
+export function signJwts(user) {
+  const accessToken = jwt.sign(
+    {
+      user,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: +process.env.ACCESS_TOKEN_EXPIRE } // in seconds
+  );
+  const refreshToken = jwt.sign(
+    { userId: user._id },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: +process.env.REFRESH_TOKEN_EXPIRE } // in seconds
+  );
+
+  return { accessToken, refreshToken };
+}
+
+export function decodeRefreshToken(token) {
+  return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
+}
+
+export function decodeAccessToken(token) {
+  return jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+}
