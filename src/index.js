@@ -1,3 +1,3 @@
-import startClusterServerInProd from './config/cluster.js'
+import startClusterServerInProd from './config/cluster.js';
 
-startClusterServerInProd()
+startClusterServerInProd();

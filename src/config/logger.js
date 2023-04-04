@@ -1,4 +1,4 @@
-import pino from 'pino'
+import pino from 'pino';
 
 const logger = pino({
   base: { pid: false },
@@ -9,6 +9,6 @@ const logger = pino({
       translateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'",
     },
   },
-})
+});
 
-export default logger
+export default logger;

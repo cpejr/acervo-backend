@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
+import mongoose from 'mongoose';
 
-import { InternalServerError } from '../errors/baseErrors.js'
-import logger from './logger.js'
+import { InternalServerError } from '../errors/baseErrors.js';
+import logger from './logger.js';
 
-mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise;
 
 export default function mongoConfig() {
   return new Promise((resolve, reject) => {
@@ -13,26 +13,26 @@ export default function mongoConfig() {
       `${encodeURI(process.env.MONGO_PASS)}@` +
       `${encodeURI(process.env.MONGO_SERVER)}/` +
       `${encodeURI(process.env.MONGO_DATABASE)}?` +
-      `${encodeURI(process.env.MONGO_OPTIONS)}`
+      `${encodeURI(process.env.MONGO_OPTIONS)}`;
 
-    mongoose.set('strictQuery', true)
+    mongoose.set('strictQuery', true);
     mongoose
       .connect(mongoUri)
       .then(() => {
-        logger.info('✅ Established connection with mongodb')
-        resolve(mongoose)
+        logger.info('✅ Established connection with mongodb');
+        resolve(mongoose);
       })
       .catch((err) => {
         const error = new InternalServerError(
           `❌ Failed to connect to mongoDB. Error: ${err}.`
-        )
-        reject(error)
-      })
+        );
+        reject(error);
+      });
 
     mongoose.connection.on('error', (err) => {
       throw new InternalServerError(
         `❌ An error has occurred with the MongoDB connection: ${err}.`
-      )
-    })
-  })
+      );
+    });
+  });
 }

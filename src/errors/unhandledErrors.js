@@ -1,5 +1,5 @@
-import logger from '../config/logger.js'
-import { EXIT_STATUS } from '../utils/general/constants.js'
+import logger from '../config/logger.js';
+import { EXIT_STATUS } from '../utils/general/constants.js';
 
 process
   .on('unhandledRejection', (reason, promise) => {
@@ -7,10 +7,10 @@ process
       `App exiting due to an unhandled promise ${JSON.stringify(
         promise
       )} and reason: ${reason}`
-    )
-    throw reason
+    );
+    throw reason;
   })
   .on('uncaughtException', (error) => {
-    logger.error(error, 'App exiting due to an uncaught exception')
-    process.exit(EXIT_STATUS.FAILURE)
-  })
+    logger.error(error, 'App exiting due to an uncaught exception');
+    process.exit(EXIT_STATUS.FAILURE);
+  });
