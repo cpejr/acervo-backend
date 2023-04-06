@@ -6,6 +6,7 @@
       -> config
       -> controllers
       -> errors
+        -> handlers
       -> mail
       -> middlewares
       -> models
@@ -25,7 +26,7 @@
 
   **-> controllers**
 
-  - Pasta em que ficarão os controllers definidos para a aplicação. Cada entidade de dados definida deve ter um controller próprio, capaz de realizar a sua função. Não somente as entidades possuem controllers, mas também as coleções não relacionais destas próprias entidades. Um controller é responsável por organizar as informações recebidas da rota e se comunicar com os diferentes models e coleções necessárias para realizar aquela ação (ex.: uma função de getAll em um ProfessorController precisa se comunicar com o ProfessorModel, para obter as informações do professor, mas precisa também pegar também através do RelationsModel informações de outras entidades que estejam vinculadas a este professor), para então organizar a resposta a ser dada.
+  - Pasta em que ficarão os controllers da aplicação. Cada entidade de dados definida pode ter um controller próprio, que será responsável por validar as informações recebidas de uma respectiva rota, se comunicar com os diferentes models e coleções necessárias para realizar determinada ação, como a de criar uma nova entidade, por exemplo, e por fim, ou responder a requisição recebida com os dados solicitados ou então passar algum erro que tenha ocorrido no processo para o middleware de tratamento de erros.
   - Cada controller consiste em um conjunto de funções a ser realizadas para aquela entidade.
 
   **-> errors**
@@ -36,7 +37,7 @@
 
   **-> mail**
 
-  - Pasta onde fica componentizada toda a configuração de envio de emails que porventura venhamos precisar enviar para os usuários da aplicação, assim como os seus respectivos conteúdos.
+  - Pasta onde fica os templates de emails a serem enviados pelo sistema e funções para o envio.
 
   **-> middlewares**
 
@@ -69,15 +70,15 @@
 
   ### Ferramentas utilizadas
 
-* [Mongoose](https://mongoosejs.com/ 'Mongoose') -> NoSQL Schema builder utilizado no projeto, tanto para modelar o banco de dados quanto para rodar queries de adição, busca, etc.
+* [mongoose](https://mongoosejs.com/ 'Mongoose') -> NoSQL Schema builder utilizado no projeto, tanto para modelar o banco de dados quanto para rodar queries de adição, busca, etc.
+* [husky](https://typicode.github.io/husky/#/ 'Husky') -> Ferramenta utilizada para automatizar a execução de comandos ao realizarmos um commit
 * [ESLint](https://eslint.org/docs/user-guide/getting-started 'ESLint') -> Ferramenta utilizada para padronização do código e do estilo aplicados.
 * [Prettier](https://prettier.io/docs/en/index.html 'Prettier') -> Ferramenta utilizada para a formatação e estilização do código.
-* [DotEnv](https://www.npmjs.com/package/dotenv 'DotEnv') -> Ferramenta de armazenamento de variáveis sensíveis, fazendo estas não irem para o git.
-* [Nodemailer](https://nodemailer.com/about/ 'Nodemailer') -> Ferramenta utilizada para envio de emails.
-* [Pino](https://betterstack.com/community/guides/logging/how-to-install-setup-and-use-pino-to-log-node-js-applications/ 'Pino') -> Ferramenta utilizada paraa configuração do logger do projeto, forma mais versátil e eficiente de explicitar as informações no console da máquina.
-* [multer-s3](https://www.npmjs.com/package/multer-s3 'multer-s3') -> Ferramenta utilizada para o processamento de arquivos para o banco de dados AWS s3.
-* [s3rver](https://www.npmjs.com/package/s3rver/v/2.2.1 's3rver') -> Ferramenta utilizada para simular o banco de dados AWS S3 em desenvolvimento.
-* [aws-sdk](https://aws.amazon.com/pt/sdk-for-javascript/ 'aws-sdk') -> Lib de integração com os serviços AWS.
-* [maildev](https://www.maildev.com/ 'maildev') -> Ferramenta utilizada para a testagem de envio de emails.
-* [Zod](https://zod.dev/ 'Zod') -> Biblioteca utilizada para tratamento de erros.
-* [Husky](https://typicode.github.io/husky/#/ 'Husky') -> Ferramenta utilizada para padromizar e melhoras commits.
+* [dotenv](https://www.npmjs.com/package/dotenv 'DotEnv') -> Ferramenta de armazenamento de variáveis sensíveis, fazendo estas não irem para o git.
+* [nodemailer](https://nodemailer.com/about/ 'Nodemailer') -> Ferramenta utilizada para envio de emails.
+* [pino](https://betterstack.com/community/guides/logging/how-to-install-setup-and-use-pino-to-log-node-js-applications/ 'Pino') -> Ferramenta utilizada para configuração do logger do projeto, forma mais versátil e eficiente de explicitar as informações no console da máquina.
+* [multer/multer-s3](https://www.npmjs.com/package/multer-s3 'multer-s3') -> Ferramentas utilizadas para o processamento de arquivos de requisições e upload para o AWS S3.
+* [s3rver](https://www.npmjs.com/package/s3rver/v/2.2.1 's3rver') -> Ferramenta utilizada para simular os servidores do AWS S3 em desenvolvimento.
+* [aws-sdk](https://aws.amazon.com/pt/sdk-for-javascript/ 'aws-sdk') -> Biblioteca utilizada para integração com os serviços AWS.
+* [maildev](https://www.maildev.com/ 'maildev') -> Ferramenta utilizada para a testagem de envio de emails em desenvolvimento.
+* [zod](https://zod.dev/ 'Zod') -> Biblioteca utilizada para validação de campos.
