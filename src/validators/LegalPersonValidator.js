@@ -156,7 +156,7 @@ export const create = validate(
         .min(3, 'Economic activity must be atleast 3 characters')
         .max(30, 'Economic activity must be a maximum of 30 characters'),
 
-      foundingDate: z.Date({ required_error: 'Date is required' }),
+      foundingDate: z.coerce.date({ required_error: 'Date is required' }),
     }),
   })
 );
@@ -222,7 +222,7 @@ export const update = validate(
         .min(1, 'Observations must be atleast 1 characters')
         .max(50, 'Observations must be a maximum of 50 characters')
         .optional(),
-      emailVerified: z.boolean(),
+      emailVerified: z.boolean().optional(),
 
       cnpj: z
         .string()
@@ -290,7 +290,7 @@ export const update = validate(
         .max(30, 'Economic activity must be a maximum of 30 characters')
         .optional(),
 
-      foundingDate: z.Date().optional(),
+      foundingDate: z.coerce.date().optional(),
     }),
     params: z.object({
       _id: objectIdSchema('User _id'),

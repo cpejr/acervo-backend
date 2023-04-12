@@ -5,7 +5,7 @@ import validate from './validate.js';
 
 export const get = validate(
   z.object({
-    query: {
+    query: z.object({
       _id: objectIdSchema('User _id').optional(),
       name: z.string().optional(),
       userName: z.string().optional(),
@@ -22,11 +22,11 @@ export const get = validate(
       observations: z.string().optional(),
       emailVerified: z.boolean().optional(),
 
-      type: z.string().optional(),
+      personType: z.string().optional(),
       cpf: z.string().optional(),
       birthday: z.date().optional(),
       profession: z.string().optional(),
-    },
+    }),
   })
 );
 
@@ -95,14 +95,11 @@ export const create = validate(
         .max(50, 'Observations must be a maximum of 50 characters'),
       emailVerified: z.boolean().default(false),
 
-      type: z
-        .string()
-        .enum(['administrador', 'estudante', 'padrao'])
-        .default('padrao'),
+      personType: z.string().default('padrao'),
       cpf: z
         .string({ required_error: 'User CPF is required' })
         .length(11, 'CPF must be exactly 14 characters long'),
-      birthday: z.date({ required_error: 'User birthday is required' }),
+      birthday: z.coerce.date({ required_error: 'User birthday is required' }),
       profession: z
         .string({ required_error: 'Profession is required' })
         .min(1, 'Profession must be atleast 1 characters')
@@ -172,17 +169,14 @@ export const update = validate(
         .min(1, 'Observations must be atleast 1 characters')
         .max(50, 'Observations must be a maximum of 50 characters')
         .optional(),
-      emailVerified: z.boolean(),
+      emailVerified: z.boolean().optional(),
 
-      type: z
-        .string()
-        .enum(['administrador', 'estudante', 'padrao'])
-        .optional(),
+      personType: z.string().optional(),
       cpf: z
         .string({ required_error: 'User CPF is required' })
         .length(11, 'CPF must be exactly 14 characters long')
         .optional(),
-      birthday: z
+      birthday: z.coerce
         .date({ required_error: 'User birthday is required' })
         .optional(),
       profession: z
