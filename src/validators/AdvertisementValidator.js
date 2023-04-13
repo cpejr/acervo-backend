@@ -6,9 +6,9 @@ import validate from './validate.js';
 export const get = validate(
   z.object({
     query: z.object({
-      __id: objectIdSchema('Sponsor _id').optional(),
-      name: z.string().optional(),
-      image: z
+      __id: objectIdSchema('Advertisement _id').optional(),
+      ownerName: z.string().optional(),
+      multimedia: z
         .object({
           _id: objectIdSchema('File _id').optional(),
           name: z.string().optional(),
@@ -25,7 +25,7 @@ export const get = validate(
 export const getById = validate(
   z.object({
     params: z.object({
-      _id: objectIdSchema('Sponsor _id'),
+      _id: objectIdSchema('Advertisement _id'),
     }),
   })
 );
@@ -33,11 +33,11 @@ export const getById = validate(
 export const create = validate(
   z.object({
     body: z.object({
-      name: z
+      ownerName: z
         .string({ required_error: 'File  name is required' })
         .min(3, 'File name must be atleast 3 characters')
         .max(50, 'File name must be a maximum of 50 characters'),
-      image: z.object(
+      multimedia: z.object(
         {
           name: z
             .string({ required_error: 'File  name is required' })
@@ -59,7 +59,7 @@ export const create = validate(
             .min(3, 'Url must be atleast 3 characters')
             .max(500, 'Url must be a maximum of 500 characters'),
         },
-        { required_error: 'Image is required' }
+        { required_error: 'Multimedia is required' }
       ),
     }),
   })
@@ -68,11 +68,11 @@ export const create = validate(
 export const update = validate(
   z.object({
     body: z.object({
-      name: z
+      ownerName: z
         .string()
         .min(3, 'File name must be atleast 3 characters')
         .max(50, 'File name must be a maximum of 50 characters'),
-      image: z.object({
+      multimedia: z.object({
         name: z
           .string()
           .min(3, 'File name must be atleast 3 characters')
@@ -93,7 +93,7 @@ export const update = validate(
       }),
     }),
     params: z.object({
-      _id: objectIdSchema('Sponsor _id'),
+      _id: objectIdSchema('Advertisement _id'),
     }),
   })
 );
@@ -101,7 +101,7 @@ export const update = validate(
 export const destroy = validate(
   z.object({
     params: z.object({
-      _id: objectIdSchema('Sponsor _id'),
+      _id: objectIdSchema('Advertisement _id'),
     }),
   })
 );

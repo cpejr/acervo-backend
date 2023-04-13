@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import AdvertisementRoutes from './AdvertisementRoutes.js';
 import DidacticMaterialRoutes from './DidacticMaterialRoutes.js';
 import EventRoutes from './EventRoutes.js';
 import FileRoutes from './FileRoutes.js';
@@ -17,5 +18,6 @@ routes.use('/didacticmaterial', DidacticMaterialRoutes);
 routes.use('/memorialmaterial', MemorialMaterialRoutes);
 routes.use('/event', EventRoutes);
 routes.use('/sponsor', SponsorRoutes);
+routes.use('/advertisement', AdvertisementRoutes);
 
 export default routes;
