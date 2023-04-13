@@ -1,7 +1,9 @@
 import { Router } from 'express';
 
+import DidacticMaterialRoutes from './DidacticMaterialRoutes.js';
 import FileRoutes from './FileRoutes.js';
 import LegalPersonRoutes from './LegalPersonRoutes.js';
+import MemorialMaterialRoutes from './MemorialMaterialRoutes.js';
 import PhysicalPersonRoutes from './PhysicalPersonRoutes.js';
 
 const routes = Router();
@@ -9,5 +11,7 @@ const routes = Router();
 routes.use('/files', FileRoutes);
 routes.use('/physicalperson', PhysicalPersonRoutes);
 routes.use('/legalperson', LegalPersonRoutes);
+routes.use('/didacticmaterial', DidacticMaterialRoutes);
+routes.use('/memorialmaterial', MemorialMaterialRoutes);
 
 export default routes;
