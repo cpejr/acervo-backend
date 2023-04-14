@@ -57,6 +57,7 @@ export const VIDEOS_CONFIG = {
 // Table names
 export const TABLE_NAMES = {
   USER: 'users',
+  POST: 'posts',
   CATEGORY: 'categories',
   PRODUCT: 'products',
   COUNTOUR_MAP: 'countourmaps',
