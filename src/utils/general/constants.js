@@ -64,6 +64,7 @@ export const TABLE_NAMES = {
   COURSE: 'courses',
   VIDEO: 'videos',
   FILE: 'files',
+  REPLIED_TO: 'repliedto',
   USER_CERTIFICATE: 'usercertificates',
   USER_PROGRESS: 'userprogresses',
   USER_TOKEN: 'usertokens',

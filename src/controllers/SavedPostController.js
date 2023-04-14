@@ -28,7 +28,7 @@ export const getByProduct = asyncHandler(async (req, res) => {
     const { product } = SavedPostValidator.getByProduct(req);
     const savedPosts = await SavedPostService.getByProduct(savedPosts);
   
-    res.status(SUCCESS_CODES.OK).json(user);
+    res.status(SUCCESS_CODES.OK).json(product);
 });
 
 export const create = asyncHandler(async (req, res) => {
