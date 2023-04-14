@@ -30,7 +30,7 @@ export const create = validate(
       user: z.string({ required_error: 'User is required' }),
       repliedTo: objectIdSchema('repliedTo'),
       message: z
-        .string({ required_error: 'Message is required'} )
+        .string({ required_error: 'Message is required' })
         .min(3, 'Message must be atleast 3 characters')
         .max(1500, 'Message must be a maximum of 1500 characters'),
     }),
@@ -40,15 +40,15 @@ export const create = validate(
 export const update = validate(
   z.object({
     body: z.object({
-        post: objectIdSchema('Post'),
-        user: z.string().optional(),
-        repliedTo: objectIdSchema('repliedTo'),
-        message: z
-          .string()
-          .min(3, 'Message must be atleast 3 characters')
-          .max(1500, 'Message must be a maximum of 1500 characters')
-          .optional(),
-      }),
+      post: objectIdSchema('Post'),
+      user: z.string().optional(),
+      repliedTo: objectIdSchema('repliedTo'),
+      message: z
+        .string()
+        .min(3, 'Message must be atleast 3 characters')
+        .max(1500, 'Message must be a maximum of 1500 characters')
+        .optional(),
+    }),
     params: z.object({
       _id: objectIdSchema('Comment _id'),
     }),

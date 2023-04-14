@@ -4,7 +4,9 @@ import * as SavedPostController from '../controllers/SavedPostController.js';
 
 const SavedPostRoutes = Router();
 
-SavedPostRoutes.route('/').get(SavedPostController.get).post(SavedPostController.create);
+SavedPostRoutes.route('/')
+  .get(SavedPostController.get)
+  .post(SavedPostController.create);
 
 SavedPostRoutes.route('/:_id')
   .get(SavedPostController.getById)

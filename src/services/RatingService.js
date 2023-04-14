@@ -12,18 +12,18 @@ export async function getById(_id) {
   return foundRating;
 }
 
-export async function getByUser(user) {
-  const foundRating = await RatingModel.findById(user).lean().exec();
+export async function getByUser(_user) {
+  const foundRating = await RatingModel.findById(_user).lean().exec();
   if (!foundRating) throw new NotFoundError('Rate not found');
-  
+
   return foundRating;
 }
 
-export async function getByProduct(product) {
-  const foundRating = await RatingModel.findById(product).lean().exec();
+export async function getByProduct(_product) {
+  const foundRating = await RatingModel.findById(_product).lean().exec();
   if (!foundRating) throw new NotFoundError('Rate not found');
-    
-    return foundRating;
+
+  return foundRating;
 }
 
 export async function create(inputData) {

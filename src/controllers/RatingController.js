@@ -18,15 +18,15 @@ export const getById = asyncHandler(async (req, res) => {
 });
 
 export const getByUser = asyncHandler(async (req, res) => {
-  const { user } = RatingValidator.getByUser(req);
-  const ratings = await RatingService.getByUser(user);
+  const { _user } = RatingValidator.getByUser(req);
+  const ratings = await RatingService.getByUser(_user);
 
   res.status(SUCCESS_CODES.OK).json(ratings);
 });
 
 export const getByProduct = asyncHandler(async (req, res) => {
-  const { product } = RatingValidator.getByProduct(req);
-  const ratings = await RatingService.getByProduct(product);
+  const { _product } = RatingValidator.getByProduct(req);
+  const ratings = await RatingService.getByProduct(_product);
 
   res.status(SUCCESS_CODES.OK).json(ratings);
 });
@@ -39,11 +39,11 @@ export const create = asyncHandler(async (req, res) => {
 });
 
 export const update = asyncHandler(async (req, res) => {
-  const { _id, user, product, ...inputData } = RatingValidator.update(req);
+  const { _id, _user, _product, ...inputData } = RatingValidator.update(req);
   const updatedRating = await RatingService.update({
     _id,
-    user,
-    product,
+    _user,
+    _product,
     inputData,
   });
 

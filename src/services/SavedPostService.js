@@ -12,20 +12,6 @@ export async function getById(_id) {
   return foundSavedPost;
 }
 
-export async function getByUser(user) {
-    const foundSavedPost = await SavedPostModel.findById(user).lean().exec();
-    if (!foundSavedPost) throw new NotFoundError('SavedPost not found');
-  
-    return foundSavedPost;
-}
-
-export async function getByProduct(product) {
-    const foundSavedPost = await SavedPostModel.findById(product).lean().exec();
-    if (!foundSavedPost) throw new NotFoundError('SavedPost not found');
-  
-    return foundSavedPost;
-}
-
 export async function create(inputData) {
   const newSavedPost = await SavedPostModel.create(inputData);
 

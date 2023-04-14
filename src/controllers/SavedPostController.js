@@ -17,20 +17,6 @@ export const getById = asyncHandler(async (req, res) => {
   res.status(SUCCESS_CODES.OK).json(savedPosts);
 });
 
-export const getByUser = asyncHandler(async (req, res) => {
-    const { user } = SavedPostValidator.getByUser(req);
-    const savedPosts = await SavedPostService.getByUser(savedPosts);
-  
-    res.status(SUCCESS_CODES.OK).json(user);
-});
-
-export const getByProduct = asyncHandler(async (req, res) => {
-    const { product } = SavedPostValidator.getByProduct(req);
-    const savedPosts = await SavedPostService.getByProduct(savedPosts);
-  
-    res.status(SUCCESS_CODES.OK).json(product);
-});
-
 export const create = asyncHandler(async (req, res) => {
   const inputData = SavedPostValidator.create(req);
   const newSavedPost = await SavedPostService.create(inputData);

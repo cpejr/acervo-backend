@@ -11,9 +11,9 @@ export const get = validate(
       description: z.string().optional(),
       price: z.string().optional(),
 
-      multimedia: z
+      image: z
         .object({
-          _id: objectIdSchema('File _id').optional(),
+          _id: objectIdSchema('Image _id').optional(),
           name: z.string().optional(),
           size: z.number().optional(),
           key: z.string().optional(),
@@ -43,18 +43,18 @@ export const create = validate(
       description: z
         .string({ required_error: 'Description is required' })
         .min(3, 'Description must be atleast 3 characters')
-        .max(300,  'Description must be a maximum of 300 characters' ),
+        .max(300, 'Description must be a maximum of 300 characters'),
 
       price: z
         .number({ required_error: 'Price is required' })
         .gte(1, 'Price must be atleast 1 real')
         .lte(1000, 'Price must be a maximum of 1000 reals'),
-      multimedia: z.object(
+      image: z.object(
         {
           name: z
-            .string({ required_error: 'File  name is required' })
-            .min(3, 'File name must be atleast 3 characters')
-            .max(50, 'File name must be a maximum of 50 characters'),
+            .string({ required_error: 'Image  name is required' })
+            .min(3, 'Image name must be atleast 3 characters')
+            .max(50, 'Image name must be a maximum of 50 characters'),
           size: z
             .number({ required_error: 'Size is required' })
             .min(1, 'Sizem must be atleast 1 character'),
@@ -71,14 +71,14 @@ export const create = validate(
             .min(3, 'Url must be atleast 3 characters')
             .max(500, 'Url must be a maximum of 500 characters'),
         },
-        { required_error: 'Multimedia is required' }
+        { required_error: 'Image is required' }
       ),
     }),
   })
 );
 
 export const update = validate(
- z.object({
+  z.object({
     body: z.object({
       name: z
         .string()
@@ -88,7 +88,7 @@ export const update = validate(
       description: z
         .string()
         .min(3, 'Description must be atleast 3 characters')
-        .max(300,  'Description must be a maximum of 300 characters' )
+        .max(300, 'Description must be a maximum of 300 characters')
         .optional(),
 
       price: z
@@ -96,37 +96,33 @@ export const update = validate(
         .gte(1, 'Price must be atleast 1 real')
         .lte(1000, 'Price must be a maximum of 1000 reals')
         .optional(),
-      multimedia: z.object(
-        {
-          name: z
-            .string()
-            .min(3, 'File name must be atleast 3 characters')
-            .max(50, 'File name must be a maximum of 50 characters')
-            .optional(),
-          size: z
-            .number()
-            .min(1, 'Sizem must be atleast 1 character')
-            .optional(),
-          key: z
-            .string()
-            .min(3, 'Key must be atleast 3 characters')
-            .max(50, 'Key must be a maximum of 50 characters')
-            .optional(),
-          mimeType: z
-            .string()
-            .min(3, 'Mime Type must be atleast 3 characters')
-            .max(50, 'Mime Type must be a maximum of 50 characters')
-            .optional(),
-          url: z
-            .string()
-            .min(3, 'Url must be atleast 3 characters')
-            .max(500, 'Url must be a maximum of 500 characters')
-            .optional(),
-        }),
+      image: z.object({
+        name: z
+          .string()
+          .min(3, 'Image name must be atleast 3 characters')
+          .max(50, 'Image name must be a maximum of 50 characters')
+          .optional(),
+        size: z.number().min(1, 'Size must be atleast 1 character').optional(),
+        key: z
+          .string()
+          .min(3, 'Key must be atleast 3 characters')
+          .max(50, 'Key must be a maximum of 50 characters')
+          .optional(),
+        mimeType: z
+          .string()
+          .min(3, 'Mime Type must be atleast 3 characters')
+          .max(50, 'Mime Type must be a maximum of 50 characters')
+          .optional(),
+        url: z
+          .string()
+          .min(3, 'Url must be atleast 3 characters')
+          .max(500, 'Url must be a maximum of 500 characters')
+          .optional(),
+      }),
     }),
     params: z.object({
-        _id: objectIdSchema('Product _id'),
-      }),
+      _id: objectIdSchema('Product _id'),
+    }),
   })
 );
 

@@ -77,15 +77,15 @@ export const update = validate(
     body: z.object({
       user: z.string().optional(),
       theme: z
-          .string()
-          .min(3, 'Theme must be atleast 3 characters')
-          .max(50, 'Theme must be a maximum of 50 characters')
-          .optional(),
-        content: z
-          .string()
-          .min(3, 'Content must be atleast 3 characters')
-          .max(1500, 'Content must be a maximum of 1500 characters')
-          .optional(),
+        .string()
+        .min(3, 'Theme must be atleast 3 characters')
+        .max(50, 'Theme must be a maximum of 50 characters')
+        .optional(),
+      content: z
+        .string()
+        .min(3, 'Content must be atleast 3 characters')
+        .max(1500, 'Content must be a maximum of 1500 characters')
+        .optional(),
       multimedia: z.object({
         name: z
           .string()

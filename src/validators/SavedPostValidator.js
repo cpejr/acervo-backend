@@ -21,32 +21,18 @@ export const getById = validate(
   })
 );
 
-export const getByUser = validate(
-    z.object({
-      params: z.object({
-        product: objectIdSchema('SavedPost _user'),
-      }),
-    })
-  );
-
-export const getByProduct = validate(
-    z.object({
-      params: z.object({
-        product: objectIdSchema('SavedPost _product'),
-      }),
-    })
-  );
+export const create = validate(
+  z.object({
+    params: z.object({
+      _id: objectIdSchema('SavedPost _id'),
+    }),
+  })
+);
 
 export const update = validate(
- z.object({
+  z.object({
     params: z.object({
-        _id: objectIdSchema('SavedPost _id'),
-    }),
-    params: z.object({
-        user: objectIdSchema('SavedPost _user'),
-    }),
-    params: z.object({
-        product: objectIdSchema('SavedPost _product'),
+      _id: objectIdSchema('SavedPost _id'),
     }),
   })
 );
