@@ -25,9 +25,9 @@ routes.use('/event', EventRoutes);
 routes.use('/sponsor', SponsorRoutes);
 routes.use('/advertisement', AdvertisementRoutes);
 routes.use('/product', ProductRoutes);
-routes.use('/post', PostRoutes); //OK
+routes.use('/post', PostRoutes); 
 routes.use('/savedpost', SavedPostRoutes);
-routes.use('/comment', CommentRoutes); //OK
+routes.use('/comment', CommentRoutes);
 routes.use('/rating', RatingRoutes);
 
 export default routes;
