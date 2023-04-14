@@ -13,14 +13,20 @@ export async function getById(_id) {
 }
 
 export async function getByUser(_user) {
-  const foundRating = await RatingModel.findById(_user).lean().exec();
+  const foundRating = await RatingModel.find({ user: _user })
+    .populate(['user', 'product'])
+    .lean()
+    .exec();
   if (!foundRating) throw new NotFoundError('Rate not found');
 
   return foundRating;
 }
 
 export async function getByProduct(_product) {
-  const foundRating = await RatingModel.findById(_product).lean().exec();
+  const foundRating = await RatingModel.find({ product: _product })
+    .populate(['user', 'product'])
+    .lean()
+    .exec();
   if (!foundRating) throw new NotFoundError('Rate not found');
 
   return foundRating;
