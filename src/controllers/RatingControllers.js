@@ -12,23 +12,23 @@ export const get = asyncHandler(async (req, res) => {
 
 export const getById = asyncHandler(async (req, res) => {
   const { _id } = RatingValidator.getById(req);
-  const rate = await RatingService.getById(_id);
+  const ratings = await RatingService.getById(_id);
 
-  res.status(SUCCESS_CODES.OK).json(rate);
+  res.status(SUCCESS_CODES.OK).json(ratings);
 });
 
 export const getByUser = asyncHandler(async (req, res) => {
   const { user } = RatingValidator.getByUser(req);
-  const rate = await RatingService.getByUser(user);
+  const ratings = await RatingService.getByUser(user);
   
-  res.status(SUCCESS_CODES.OK).json(rate);
+  res.status(SUCCESS_CODES.OK).json(ratings);
 });
 
 export const getByProduct = asyncHandler(async (req, res) => {
   const { product } = RatingValidator.getByProduct(req);
-  const rate = await RatingService.getByProduct(product);
+  const ratings = await RatingService.getByProduct(product);
   
-  res.status(SUCCESS_CODES.OK).json(rate);
+  res.status(SUCCESS_CODES.OK).json(ratings);
   });
 
 export const create = asyncHandler(async (req, res) => {
