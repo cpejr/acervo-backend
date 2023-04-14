@@ -5,9 +5,9 @@ import * as ProductValidator from '../validators/ProductValidator.js';
 
 export const get = asyncHandler(async (req, res) => {
   const inputFilters = ProductValidator.get(req);
-  const Products = await ProductService.get(inputFilters);
+  const products = await ProductService.get(inputFilters);
 
-  res.status(SUCCESS_CODES.OK).json(Products);
+  res.status(SUCCESS_CODES.OK).json(products);
 });
 
 export const getById = asyncHandler(async (req, res) => {
