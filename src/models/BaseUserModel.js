@@ -1,5 +1,10 @@
 import mongoose from 'mongoose';
 
+import CommentModel from './CommentModel.js';
+import PostModel from './PostModel.js';
+import RatingModel from './RatingModel.js';
+import SavedPostModel from './SavedPostModel.js';
+
 export const discriminatorKey = 'type';
 
 const BaseUserSchema = new mongoose.Schema(

@@ -17,7 +17,7 @@ const DidacticMaterialModel = MaterialModel.discriminator(
           'Personalidades históricas',
           'Patrimônio histórico e cultural (material e imaterial)',
         ],
-        requuired: true,
+        required: true,
       },
     },
     { discriminatorKey }

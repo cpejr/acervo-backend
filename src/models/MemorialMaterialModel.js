@@ -9,7 +9,7 @@ const MemorialMaterialModel = MaterialModel.discriminator(
       category: {
         type: String,
         enum: ['Monumentos históricos', 'Acervo fotográfico', 'Vídeos'],
-        requuired: true,
+        required: true,
       },
     },
     { discriminatorKey }
