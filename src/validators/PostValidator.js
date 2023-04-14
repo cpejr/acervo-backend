@@ -8,7 +8,6 @@ export const get = validate(
     query: z.object({
       _id: objectIdSchema('Post _id').optional(),
       user: z.string().optional(),
-      user: z.string().optional(),
       theme: z.string().optional(),
       content: z.string().optional(),
       multimedia: z

@@ -70,5 +70,21 @@ BaseUserSchema.index(
   }
 ); // After 15 minutes, if the user is not active, the document will be automatically deleted
 
+// Delete all instances associated to that user
+BaseUserSchema.pre(
+  'deleteOne',
+  { document: true, query: false }, // More details on https://mongoosejs.com/docs/api/schema.html#schema_Schema-pre
+  async function (next) {
+    await Promise.all([
+      CommentModel.deleteMany({ user: this._id }).exec(),
+      PostModel.deleteMany({ user: this._id }).exec(),
+      RatingModel.deleteMany({ user: this._id }).exec(),
+      SavedPostModel.deleteMany({ user: this._id }).exec(),
+    ]);
+
+    next();
+  }
+);
+
 const BaseUserModel = mongoose.model('User', BaseUserSchema);
 export default BaseUserModel;
