@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import CommentModel from './CommentModel.js';
 import PostModel from './PostModel.js';
 import RatingModel from './RatingModel.js';
@@ -91,5 +92,5 @@ BaseUserSchema.pre(
   }
 );
 
-const BaseUserModel = mongoose.model('User', BaseUserSchema);
+const BaseUserModel = mongoose.model(TABLE_NAMES.USER, BaseUserSchema);
 export default BaseUserModel;

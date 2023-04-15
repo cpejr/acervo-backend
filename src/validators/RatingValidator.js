@@ -23,20 +23,20 @@ export const getById = validate(
 );
 
 export const getByUser = validate(
-    z.object({
-      params: z.object({
-        product: objectIdSchema('Rating _user'),
-      }),
-    })
-  );
+  z.object({
+    params: z.object({
+      product: objectIdSchema('Rating _user'),
+    }),
+  })
+);
 
 export const getByProduct = validate(
-    z.object({
-      params: z.object({
-        product: objectIdSchema('Rating _product'),
-      }),
-    })
-  );
+  z.object({
+    params: z.object({
+      product: objectIdSchema('Rating _product'),
+    }),
+  })
+);
 
 export const create = validate(
   z.object({
@@ -45,12 +45,14 @@ export const create = validate(
         .number({ required_error: 'Rating value is required' })
         .gte(1, 'Rating value must be atleast 1 characters')
         .lte(5, 'Rating value must be a maximum of 5 characters'),
+      product: objectIdSchema('Rating product'),
+      user: objectIdSchema('Rating user'),
     }),
   })
 );
 
 export const update = validate(
- z.object({
+  z.object({
     body: z.object({
       value: z
         .number()
@@ -58,13 +60,7 @@ export const update = validate(
         .lte(5, 'Rating value must be a maximum of 5 characters'),
     }),
     params: z.object({
-        _id: objectIdSchema('Rating _id'),
-    }),
-    params: z.object({
-        user: objectIdSchema('Rating _user'),
-    }),
-    params: z.object({
-        product: objectIdSchema('Rating _product'),
+      _id: objectIdSchema('Rating _id'),
     }),
   })
 );

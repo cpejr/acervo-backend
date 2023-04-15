@@ -2,7 +2,10 @@ import { NotFoundError } from '../errors/baseErrors.js';
 import RatingModel from '../models/RatingModel.js';
 
 export async function get(inputFilters) {
-  return RatingModel.find(inputFilters).lean().exec();
+  return RatingModel.find(inputFilters)
+    .populate(['user', 'product'])
+    .lean()
+    .exec();
 }
 
 export async function getById(_id) {
