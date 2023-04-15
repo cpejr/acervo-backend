@@ -37,7 +37,12 @@ export const DOCUMENTS_CONFIG = {
 };
 export const PICTURES_CONFIG = {
   fileName: 'Picture',
-  allowedMimeTypes: ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
+  allowedMimeTypes: ['image/jpeg', 'image/png'],
+  sizeLimitInMB: 5,
+};
+export const IMAGE_CONFIG = {
+  fileName: 'Image',
+  allowedMimeTypes: ['image/jpeg', 'image/png'],
   sizeLimitInMB: 5,
 };
 export const VIDEOS_CONFIG = {

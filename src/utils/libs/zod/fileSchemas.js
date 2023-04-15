@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 import {
   DOCUMENTS_CONFIG,
+  IMAGE_CONFIG,
   PICTURES_CONFIG,
   VIDEOS_CONFIG,
 } from '../../general/constants.js';
@@ -49,3 +50,4 @@ const schema = ({ fileName, allowedMimeTypes, sizeLimitInMB }) =>
 export const documentSchema = schema(DOCUMENTS_CONFIG);
 export const pictureSchema = schema(PICTURES_CONFIG);
 export const videoSchema = schema(VIDEOS_CONFIG);
+export const imageSchema = schema(IMAGE_CONFIG);

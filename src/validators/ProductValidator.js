@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { imageSchema } from '../utils/libs/zod/fileSchemas.js';
 import objectIdSchema from '../utils/libs/zod/objectIdSchema.js';
 import validate from './validate.js';
 
@@ -45,34 +46,16 @@ export const create = validate(
         .min(3, 'Description must be atleast 3 characters')
         .max(300, 'Description must be a maximum of 300 characters'),
 
-      price: z
+      price: z.coerce
         .number({ required_error: 'Price is required' })
         .gte(1, 'Price must be atleast 1 real')
         .lte(1000, 'Price must be a maximum of 1000 reals'),
-      image: z.object(
-        {
-          name: z
-            .string({ required_error: 'Image  name is required' })
-            .min(3, 'Image name must be atleast 3 characters')
-            .max(50, 'Image name must be a maximum of 50 characters'),
-          size: z
-            .number({ required_error: 'Size is required' })
-            .min(1, 'Sizem must be atleast 1 character'),
-          key: z
-            .string({ required_error: 'Key is required' })
-            .min(3, 'Key must be atleast 3 characters')
-            .max(50, 'Key must be a maximum of 50 characters'),
-          mimeType: z
-            .string({ required_error: 'Mime Type is required' })
-            .min(3, 'Mime Type must be atleast 3 characters')
-            .max(50, 'Mime Type must be a maximum of 50 characters'),
-          url: z
-            .string({ required_error: 'Url is required' })
-            .min(3, 'Url must be atleast 3 characters')
-            .max(500, 'Url must be a maximum of 500 characters'),
-        },
-        { required_error: 'Image is required' }
-      ),
+    }),
+    files: z.object({
+      image: z
+        .array(imageSchema)
+        .length(1, 'You can not post more than 1 file')
+        .transform(([image]) => image),
     }),
   })
 );
