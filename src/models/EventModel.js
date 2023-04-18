@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import { FileSchema } from './FileModel.js';
 
 const EventSchema = new mongoose.Schema(
@@ -35,5 +36,5 @@ const EventSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const EventModel = mongoose.model('Event', EventSchema);
+const EventModel = mongoose.model(TABLE_NAMES.EVENT, EventSchema);
 export default EventModel;

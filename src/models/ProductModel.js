@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 import * as awsS3 from '../config/S3/awsS3.js';
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import { FileSchema } from './FileModel.js';
 
 const ProductSchema = new mongoose.Schema(
@@ -38,5 +39,5 @@ ProductSchema.pre('deleteMany', async function () {
   return awsS3.deleteFiles(keys);
 });
 
-const ProductModel = mongoose.model('Product', ProductSchema);
+const ProductModel = mongoose.model(TABLE_NAMES.PRODUCT, ProductSchema);
 export default ProductModel;

@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import { multimediaSchema } from '../utils/libs/zod/fileSchemas.js';
 import objectIdSchema from '../utils/libs/zod/objectIdSchema.js';
 import validate from './validate.js';
 
@@ -37,30 +38,10 @@ export const create = validate(
         .string({ required_error: 'File  name is required' })
         .min(3, 'File name must be atleast 3 characters')
         .max(50, 'File name must be a maximum of 50 characters'),
-      multimedia: z.object(
-        {
-          name: z
-            .string({ required_error: 'File  name is required' })
-            .min(3, 'File name must be atleast 3 characters')
-            .max(50, 'File name must be a maximum of 50 characters'),
-          size: z
-            .number({ required_error: 'Size is required' })
-            .min(1, 'Sizem must be atleast 1 character'),
-          key: z
-            .string({ required_error: 'Key is required' })
-            .min(3, 'Key must be atleast 3 characters')
-            .max(50, 'Key must be a maximum of 50 characters'),
-          mimeType: z
-            .string({ required_error: 'Mime Type is required' })
-            .min(3, 'Mime Type must be atleast 3 characters')
-            .max(50, 'Mime Type must be a maximum of 50 characters'),
-          url: z
-            .string({ required_error: 'Url is required' })
-            .min(3, 'Url must be atleast 3 characters')
-            .max(500, 'Url must be a maximum of 500 characters'),
-        },
-        { required_error: 'Multimedia is required' }
-      ),
+      multimedia: z
+        .array(multimediaSchema)
+        .length(1, 'You can not post more than 1 file')
+        .transform(([multimedia]) => multimedia),
     }),
   })
 );

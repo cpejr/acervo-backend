@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import BaseUserModel, { discriminatorKey } from './BaseUserModel.js';
 
 const PhysicalPersonModel = BaseUserModel.discriminator(
-  'PhysicalPerson',
+  TABLE_NAMES.PHYSICAL_PERSON,
   new mongoose.Schema(
     {
       cpf: {
