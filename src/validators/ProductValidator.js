@@ -1,20 +1,20 @@
 import { z } from 'zod';
 
-import { multimediaSchema } from '../utils/libs/zod/fileSchemas.js';
+import { imageSchema } from '../utils/libs/zod/fileSchemas.js';
 import objectIdSchema from '../utils/libs/zod/objectIdSchema.js';
 import validate from './validate.js';
 
 export const get = validate(
   z.object({
     query: z.object({
-      _id: objectIdSchema('Event _id').optional(),
-      category: z.string().optional(),
-      title: z.string().optional(),
-      subtitle: z.string().optional(),
+      _id: objectIdSchema('Product _id').optional(),
+      name: z.string().optional(),
       description: z.string().optional(),
-      multimedia: z
+      price: z.string().optional(),
+
+      image: z
         .object({
-          _id: objectIdSchema('File _id').optional(),
+          _id: objectIdSchema('Image _id').optional(),
           name: z.string().optional(),
           size: z.number().optional(),
           key: z.string().optional(),
@@ -29,7 +29,7 @@ export const get = validate(
 export const getById = validate(
   z.object({
     params: z.object({
-      _id: objectIdSchema('Event _id'),
+      _id: objectIdSchema('Product _id'),
     }),
   })
 );
@@ -37,24 +37,25 @@ export const getById = validate(
 export const create = validate(
   z.object({
     body: z.object({
-      category: z.string({ required_error: 'Category is required' }),
-      title: z
-        .string({ required_error: 'Title is required' })
-        .min(3, 'Title must be atleast 3 characters')
-        .max(50, 'Title must be a maximum of 50 characters'),
-      subtitle: z
-        .string()
-        .min(3, 'Subtitle must be atleast 3 characters')
-        .max(50, 'Subtitle must be a maximum of 50 characters')
-        .optional(),
+      name: z
+        .string({ required_error: 'Name is required' })
+        .min(2, 'Name must be atleast 2 characters')
+        .max(50, 'Name must be a maximum of 50 characters'),
       description: z
         .string({ required_error: 'Description is required' })
         .min(3, 'Description must be atleast 3 characters')
         .max(300, 'Description must be a maximum of 300 characters'),
-      multimedia: z
-        .array(multimediaSchema)
+
+      price: z.coerce
+        .number({ required_error: 'Price is required' })
+        .gte(1, 'Price must be atleast 1 real')
+        .lte(1000, 'Price must be a maximum of 1000 reals'),
+    }),
+    files: z.object({
+      image: z
+        .array(imageSchema)
         .length(1, 'You can not post more than 1 file')
-        .transform(([multimedia]) => multimedia),
+        .transform(([image]) => image),
     }),
   })
 );
@@ -62,27 +63,27 @@ export const create = validate(
 export const update = validate(
   z.object({
     body: z.object({
-      category: z.string().optional(),
-      title: z
+      name: z
         .string()
-        .min(3, 'Title must be atleast 3 characters')
-        .max(50, 'Title must be a maximum of 50 characters')
-        .optional(),
-      subtitle: z
-        .string()
-        .min(3, 'Subtitle must be atleast 3 characters')
-        .max(50, 'Subtitle must be a maximum of 50 characters')
+        .min(2, 'Name must be atleast 2 characters')
+        .max(50, 'Name must be a maximum of 50 characters')
         .optional(),
       description: z
         .string()
         .min(3, 'Description must be atleast 3 characters')
         .max(300, 'Description must be a maximum of 300 characters')
         .optional(),
-      multimedia: z.object({
+
+      price: z
+        .number()
+        .gte(1, 'Price must be atleast 1 real')
+        .lte(1000, 'Price must be a maximum of 1000 reals')
+        .optional(),
+      image: z.object({
         name: z
           .string()
-          .min(3, 'File name must be atleast 3 characters')
-          .max(50, 'File name must be a maximum of 50 characters')
+          .min(3, 'Image name must be atleast 3 characters')
+          .max(50, 'Image name must be a maximum of 50 characters')
           .optional(),
         size: z.number().min(1, 'Size must be atleast 1 character').optional(),
         key: z
@@ -103,7 +104,7 @@ export const update = validate(
       }),
     }),
     params: z.object({
-      _id: objectIdSchema('Event _id'),
+      _id: objectIdSchema('Product _id'),
     }),
   })
 );
@@ -111,7 +112,7 @@ export const update = validate(
 export const destroy = validate(
   z.object({
     params: z.object({
-      _id: objectIdSchema('Event _id'),
+      _id: objectIdSchema('Product _id'),
     }),
   })
 );

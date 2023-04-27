@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import { FileSchema } from './FileModel.js';
 
 const AdvertisementSchema = new mongoose.Schema(
@@ -13,5 +14,8 @@ const AdvertisementSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const AdvertisementModel = mongoose.model('Advertisement', AdvertisementSchema);
+const AdvertisementModel = mongoose.model(
+  TABLE_NAMES.ADVERTISEMENT,
+  AdvertisementSchema
+);
 export default AdvertisementModel;

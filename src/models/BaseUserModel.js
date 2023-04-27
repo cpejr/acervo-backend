@@ -1,5 +1,11 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
+import CommentModel from './CommentModel.js';
+import PostModel from './PostModel.js';
+import RatingModel from './RatingModel.js';
+import SavedPostModel from './SavedPostModel.js';
+
 export const discriminatorKey = 'type';
 
 const BaseUserSchema = new mongoose.Schema(
@@ -70,5 +76,21 @@ BaseUserSchema.index(
   }
 ); // After 15 minutes, if the user is not active, the document will be automatically deleted
 
-const BaseUserModel = mongoose.model('User', BaseUserSchema);
+// Delete all instances associated to that user
+BaseUserSchema.pre(
+  'deleteOne',
+  { document: true, query: false }, // More details on https://mongoosejs.com/docs/api/schema.html#schema_Schema-pre
+  async function (next) {
+    await Promise.all([
+      CommentModel.deleteMany({ user: this._id }).exec(),
+      PostModel.deleteMany({ user: this._id }).exec(),
+      RatingModel.deleteMany({ user: this._id }).exec(),
+      SavedPostModel.deleteMany({ user: this._id }).exec(),
+    ]);
+
+    next();
+  }
+);
+
+const BaseUserModel = mongoose.model(TABLE_NAMES.USER, BaseUserSchema);
 export default BaseUserModel;

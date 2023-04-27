@@ -7,11 +7,10 @@ import validate from './validate.js';
 export const get = validate(
   z.object({
     query: z.object({
-      _id: objectIdSchema('Event _id').optional(),
-      category: z.string().optional(),
-      title: z.string().optional(),
-      subtitle: z.string().optional(),
-      description: z.string().optional(),
+      _id: objectIdSchema('Post _id').optional(),
+      user: z.string().optional(),
+      theme: z.string().optional(),
+      content: z.string().optional(),
       multimedia: z
         .object({
           _id: objectIdSchema('File _id').optional(),
@@ -29,7 +28,7 @@ export const get = validate(
 export const getById = validate(
   z.object({
     params: z.object({
-      _id: objectIdSchema('Event _id'),
+      _id: objectIdSchema('Post _id'),
     }),
   })
 );
@@ -37,20 +36,15 @@ export const getById = validate(
 export const create = validate(
   z.object({
     body: z.object({
-      category: z.string({ required_error: 'Category is required' }),
-      title: z
-        .string({ required_error: 'Title is required' })
-        .min(3, 'Title must be atleast 3 characters')
-        .max(50, 'Title must be a maximum of 50 characters'),
-      subtitle: z
+      user: z.string({ required_error: 'User is required' }),
+      theme: z
+        .string({ required_error: 'Theme is required' })
+        .min(3, 'Theme must be atleast 3 characters')
+        .max(50, 'Theme must be a maximum of 50 characters'),
+      content: z
         .string()
-        .min(3, 'Subtitle must be atleast 3 characters')
-        .max(50, 'Subtitle must be a maximum of 50 characters')
-        .optional(),
-      description: z
-        .string({ required_error: 'Description is required' })
-        .min(3, 'Description must be atleast 3 characters')
-        .max(300, 'Description must be a maximum of 300 characters'),
+        .min(3, 'Content must be atleast 3 characters')
+        .max(1500, 'Content must be a maximum of 1500 characters'),
       multimedia: z
         .array(multimediaSchema)
         .length(1, 'You can not post more than 1 file')
@@ -62,21 +56,16 @@ export const create = validate(
 export const update = validate(
   z.object({
     body: z.object({
-      category: z.string().optional(),
-      title: z
+      user: z.string().optional(),
+      theme: z
         .string()
-        .min(3, 'Title must be atleast 3 characters')
-        .max(50, 'Title must be a maximum of 50 characters')
+        .min(3, 'Theme must be atleast 3 characters')
+        .max(50, 'Theme must be a maximum of 50 characters')
         .optional(),
-      subtitle: z
+      content: z
         .string()
-        .min(3, 'Subtitle must be atleast 3 characters')
-        .max(50, 'Subtitle must be a maximum of 50 characters')
-        .optional(),
-      description: z
-        .string()
-        .min(3, 'Description must be atleast 3 characters')
-        .max(300, 'Description must be a maximum of 300 characters')
+        .min(3, 'Content must be atleast 3 characters')
+        .max(1500, 'Content must be a maximum of 1500 characters')
         .optional(),
       multimedia: z.object({
         name: z
@@ -103,7 +92,7 @@ export const update = validate(
       }),
     }),
     params: z.object({
-      _id: objectIdSchema('Event _id'),
+      _id: objectIdSchema('Post _id'),
     }),
   })
 );
@@ -111,7 +100,7 @@ export const update = validate(
 export const destroy = validate(
   z.object({
     params: z.object({
-      _id: objectIdSchema('Event _id'),
+      _id: objectIdSchema('Post _id'),
     }),
   })
 );

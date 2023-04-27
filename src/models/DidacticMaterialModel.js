@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import MaterialModel, { discriminatorKey } from './MaterialModel.js';
 
 const DidacticMaterialModel = MaterialModel.discriminator(
-  'DidacticMaterial',
+  TABLE_NAMES.DIDACTIC_MATERIAL,
   new mongoose.Schema(
     {
       category: {
@@ -17,7 +18,7 @@ const DidacticMaterialModel = MaterialModel.discriminator(
           'Personalidades históricas',
           'Patrimônio histórico e cultural (material e imaterial)',
         ],
-        requuired: true,
+        required: true,
       },
     },
     { discriminatorKey }

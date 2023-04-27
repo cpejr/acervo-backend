@@ -1,9 +1,10 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import BaseUserModel, { discriminatorKey } from './BaseUserModel.js';
 
 const LegalPersonModel = BaseUserModel.discriminator(
-  'LegalPerson',
+  TABLE_NAMES.LEGAL_PERSON,
   new mongoose.Schema(
     {
       cnpj: {

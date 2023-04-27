@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+import { TABLE_NAMES } from '../utils/general/constants.js';
 import { FileSchema } from './FileModel.js';
 
 export const discriminatorKey = 'type';
@@ -26,5 +27,5 @@ const MaterialSchema = new mongoose.Schema(
   { discriminatorKey }
 );
 
-const MaterialModel = mongoose.model('Material', MaterialSchema);
+const MaterialModel = mongoose.model(TABLE_NAMES.MATERIAL, MaterialSchema);
 export default MaterialModel;
