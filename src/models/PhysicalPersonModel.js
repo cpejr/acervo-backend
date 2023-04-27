@@ -2,6 +2,12 @@ import mongoose from 'mongoose';
 
 import BaseUserModel, { discriminatorKey } from './BaseUserModel.js';
 
+const PHYSICAL_PERSON_TYPES = {
+  ADMNISTRATOR: 'ADMINISTRADOR',
+  STUDENT: 'ESTUDANTE',
+  DEFAULT: 'PADRAO',
+};
+
 const PhysicalPersonModel = BaseUserModel.discriminator(
   'PhysicalPerson',
   new mongoose.Schema(
@@ -14,8 +20,8 @@ const PhysicalPersonModel = BaseUserModel.discriminator(
       personType: {
         type: String,
         required: true,
-        enum: ['administrador', 'estudante', 'padrao'],
-        default: 'padrao',
+        enum: Object.values(PHYSICAL_PERSON_TYPES),
+        default: PHYSICAL_PERSON_TYPES.DEFAULT,
       },
       birthday: {
         type: Date,
