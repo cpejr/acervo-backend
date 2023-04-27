@@ -28,7 +28,7 @@ export default function createUploaderMiddleware({
         if (err) cb(err);
 
         const key = `${hash.toString('hex')}-${file.originalname}`;
-        cb(null, `iztweb/${key}`);
+        cb(null, `acervo/${key}`);
       });
     },
   });

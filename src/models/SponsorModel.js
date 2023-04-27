@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 import { TABLE_NAMES } from '../utils/general/constants.js';
-import { FileSchema } from './FileModel.js';
+import FileSchema from '../utils/libs/mongoose/subdocuments/FilseSchema.js';
 
 const SponsorSchema = new mongoose.Schema(
   {

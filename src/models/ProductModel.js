@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import * as awsS3 from '../config/S3/awsS3.js';
 import { TABLE_NAMES } from '../utils/general/constants.js';
-import { FileSchema } from './FileModel.js';
+import FileSchema from '../utils/libs/mongoose/subdocuments/FilseSchema.js';
 
 const ProductSchema = new mongoose.Schema(
   {
