@@ -5,7 +5,7 @@ import { S3RVER_ENDPOINT } from '../config/S3/s3rver.js';
 import { TABLE_NAMES } from '../utils/general/constants.js';
 import isDevEnvironment from '../utils/general/isDevEnvironment.js';
 
-const FileSchema = new mongoose.Schema(
+export const FileSchema = new mongoose.Schema(
   {
     name: {
       type: String,
