@@ -5,7 +5,7 @@ import isDevEnvironment from '../utils/general/isDevEnvironment.js';
 import logger from './logger.js';
 import startServer from './server/startServer.js';
 
-const runPrimaryProcess = () => {
+function runPrimaryProcess() {
   const processesCount = os.cpus().length;
 
   for (let index = 0; index < processesCount; index += 1) cluster.fork();
@@ -16,7 +16,7 @@ const runPrimaryProcess = () => {
       cluster.fork();
     }
   });
-};
+}
 
 export default function startClusterServerInProd() {
   if (isDevEnvironment) return startServer();

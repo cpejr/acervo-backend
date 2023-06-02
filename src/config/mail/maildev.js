@@ -22,7 +22,7 @@ export default function maildevConfig() {
           `✅ Established connection with maildev at ${mailDevUrl}/maildev`
         );
 
-        resolve(maildev);
+        resolve();
       }
     });
   });

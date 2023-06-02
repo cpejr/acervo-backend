@@ -36,3 +36,5 @@ export default function mongoConfig() {
     });
   });
 }
+
+export const { ObjectId } = mongoose.Types;

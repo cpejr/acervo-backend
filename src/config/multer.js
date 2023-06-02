@@ -7,15 +7,13 @@ import { BadRequest } from '../errors/baseErrors.js';
 import numToMegaBytes from '../utils/general/numToMegaBytes.js';
 import s3 from './S3/awsS3.js';
 
-export default function createUploaderMiddleware({
+export default function multerConfig({
   bucket = process.env.AWS_BUCKET_NAME,
   acl = 'public-read',
   allowedMimes,
   sizeLimitInMB,
-  fields,
 }) {
   const metadata = (req, file, cb) => cb(null, file);
-
   const storage = multerS3({
     s3,
     bucket,
@@ -23,12 +21,13 @@ export default function createUploaderMiddleware({
     acl,
     metadata,
     key: (req, file, cb) => {
-      const bytesNumber = 16;
+      const bytesNumber = 32;
       crypto.randomBytes(bytesNumber, (err, hash) => {
         if (err) cb(err);
-
-        const key = `${hash.toString('hex')}-${file.originalname}`;
-        cb(null, `acervo/${key}`);
+        else {
+          const key = `${hash.toString('hex')}-${file.originalname}`;
+          cb(null, `acervo/${key}`);
+        }
       });
     },
   });
@@ -41,10 +40,9 @@ export default function createUploaderMiddleware({
 
     return cb(null, true);
   };
-
   return multer({
     storage,
     limits: { fileSize: numToMegaBytes(sizeLimitInMB) },
     fileFilter,
-  }).fields(fields);
+  });
 }

@@ -4,7 +4,9 @@ import * as CommentController from '../controllers/CommentController.js';
 
 const CommentRoutes = Router();
 
-CommentRoutes.route('/').get(CommentController.get).post(CommentController.create);
+CommentRoutes.route('/')
+  .get(CommentController.get)
+  .post(CommentController.create);
 
 CommentRoutes.route('/:_id')
   .get(CommentController.getById)

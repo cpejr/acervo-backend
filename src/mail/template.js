@@ -26,6 +26,8 @@ const template = (body) => html`
         td,
         div,
         h1,
+        h2,
+        h3,
         p {
           font-family: Arial, sans-serif;
         }

@@ -13,8 +13,8 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 
   if (!token) throw new UnauthorizedError('No token provided'); // Token not found
 
-  const decoded = decodeAccessToken(token);
-  req.isAdmin = decoded.user.isAdmin;
+  const { user } = await decodeAccessToken(token);
+  req.user = user;
 
   next();
 });

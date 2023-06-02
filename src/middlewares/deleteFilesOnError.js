@@ -1,20 +1,29 @@
 import logger from '../config/logger.js';
 import * as awsS3 from '../config/S3/awsS3.js';
 
-// TODO: add suport for multer .single .array .any
 const deleteFilesOnError = async (err, req, res, next) => {
-  const { files } = req;
-  if (!files || !Object.keys(files)) return next(err);
-
-  const filesObjs = Object.values(files).reduce(
-    // Merge all properties array values
-    (acc, fileObj) => [...acc, ...fileObj],
-    []
-  );
-  const keys = filesObjs.map(({ key }) => key);
+  const { files, file } = req;
 
   try {
-    await awsS3.deleteFiles(keys);
+    // if multer .array
+    if (Array.isArray(files)) {
+      const keys = files?.map(({ key }) => key);
+
+      await awsS3.deleteFiles(keys);
+      return next(err);
+    }
+
+    // If multer .fields
+    if (files && Object.keys(files)) {
+      const filesObjs = Object.values(files).flat();
+      const keys = filesObjs?.map(({ key }) => key);
+
+      await awsS3.deleteFiles(keys);
+      return next(err);
+    }
+
+    // If multer .single
+    if (file) await awsS3.deleteFile(file.key);
   } catch (error) {
     logger.error(error, 'Error from the deleteFilesOnError middleware');
   }

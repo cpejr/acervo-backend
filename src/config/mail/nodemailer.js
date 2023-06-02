@@ -26,19 +26,17 @@ const transporterConfig = {
 const transporter = nodemailer.createTransport(
   transporterConfig[process.env.NODE_ENV]
 );
-export default class Email {
-  static async sendEmail(request) {
-    const config = {
-      from: `${process.env.EMAIL_FROM}`,
-      ...request,
-    };
-    try {
-      await transporter.sendMail(config);
-      logger.info(`Email sended from ${config.from} to ${config.to}`);
-    } catch (error) {
-      throw new InternalServerError(
-        `Nodemailer error in sending email: ${error.message}`
-      );
-    }
+export default async function sendEmail(request) {
+  const config = {
+    from: `${process.env.EMAIL_FROM}`,
+    ...request,
+  };
+  try {
+    await transporter.sendMail(config);
+    logger.info(`Email sended from ${config.from} to ${config.to}`);
+  } catch (error) {
+    throw new InternalServerError(
+      `Nodemailer error in sending email: ${error.message}`
+    );
   }
 }

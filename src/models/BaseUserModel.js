@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 import { TABLE_NAMES } from '../utils/general/constants.js';
+import { hashPassword } from '../utils/libs/bcrypt.js';
 import CommentModel from './CommentModel.js';
 import PostModel from './PostModel.js';
 import RatingModel from './RatingModel.js';
@@ -76,19 +77,26 @@ BaseUserSchema.index(
   }
 ); // After 15 minutes, if the user is not active, the document will be automatically deleted
 
+BaseUserSchema.pre('save', async function (next) {
+  // only hash the password if it has been modified or it is new
+  if (this.isModified('password')) {
+    this.password = await hashPassword(this.password);
+  }
+
+  next();
+});
+
 // Delete all instances associated to that user
 BaseUserSchema.pre(
   'deleteOne',
   { document: true, query: false }, // More details on https://mongoosejs.com/docs/api/schema.html#schema_Schema-pre
-  async function (next) {
-    await Promise.all([
+  async function () {
+    return Promise.all([
       CommentModel.deleteMany({ user: this._id }).exec(),
       PostModel.deleteMany({ user: this._id }).exec(),
       RatingModel.deleteMany({ user: this._id }).exec(),
       SavedPostModel.deleteMany({ user: this._id }).exec(),
     ]);
-
-    next();
   }
 );
 
