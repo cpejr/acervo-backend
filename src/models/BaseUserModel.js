@@ -24,6 +24,11 @@ const BaseUserSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
+    password: {
+      type: String,
+      required: true,
+      select: false,
+    },
     phone: {
       type: String,
     },
