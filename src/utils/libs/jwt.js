@@ -17,10 +17,24 @@ export function signJwts(user) {
   return { accessToken, refreshToken };
 }
 
+export function pwdJwts(_id) {
+  const passwordToken = jwt.sign(
+    {
+      _id,
+    },
+    process.env.PASSWORD_TOKEN_SECRET,
+    { expiresIn: +process.env.PASSWORD_TOKEN_EXPIRE } // in seconds
+  );
+  return { passwordToken };
+}
+
 export function decodeRefreshToken(token) {
   return jwt.verify(token, process.env.REFRESH_TOKEN_SECRET);
 }
 
 export function decodeAccessToken(token) {
   return jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+}
+export function decodePwdToken(token) {
+  return jwt.verify(token, process.env.PASSWORD_TOKEN_SECRET);
 }
