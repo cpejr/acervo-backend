@@ -11,6 +11,7 @@ import PostRoutes from './PostRoutes.js';
 import ProductRoutes from './ProductRoutes.js';
 import RatingRoutes from './RatingRoutes.js';
 import SavedPostRoutes from './SavedPostRoutes.js';
+import SessionRoutes from './SessionRoutes.js';
 import SponsorRoutes from './SponsorRoutes.js';
 
 const routes = Router();
@@ -27,6 +28,7 @@ routes
   .use('/post', PostRoutes)
   .use('/savedpost', SavedPostRoutes)
   .use('/comment', CommentRoutes)
-  .use('/rating', RatingRoutes);
+  .use('/rating', RatingRoutes)
+  .use('/', SessionRoutes);
 
 export default routes;

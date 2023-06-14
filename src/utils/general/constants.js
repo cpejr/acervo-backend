@@ -93,4 +93,5 @@ export const TABLE_NAMES = {
   RATING: 'ratings',
   SAVED_POST: 'savedposts',
   SPONSOR: 'sponsors',
+  USER_SESSION_TOKEN: 'usersessiontokens',
 };
