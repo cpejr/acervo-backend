@@ -36,7 +36,7 @@ export default function s3rverConfig() {
         logger.info(
           `✅ Established connection with S3rver at address ${address} and port ${port}`
         );
-        resolve(instance);
+        resolve();
       }
     });
   });

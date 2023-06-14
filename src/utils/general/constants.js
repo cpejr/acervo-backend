@@ -37,7 +37,12 @@ export const DOCUMENTS_CONFIG = {
 };
 export const PICTURES_CONFIG = {
   fileName: 'Picture',
-  allowedMimeTypes: ['image/jpeg', 'image/pjpeg', 'image/png', 'image/gif'],
+  allowedMimeTypes: ['image/jpeg', 'image/png'],
+  sizeLimitInMB: 5,
+};
+export const IMAGE_CONFIG = {
+  fileName: 'Image',
+  allowedMimeTypes: ['image/jpeg', 'image/png'],
   sizeLimitInMB: 5,
 };
 export const VIDEOS_CONFIG = {
@@ -53,17 +58,39 @@ export const VIDEOS_CONFIG = {
   ],
   sizeLimitInMB: 500,
 };
+export const MULTIMEDIA_CONFIG = {
+  fileName: 'multimedia',
+  allowedMimeTypes: [
+    'video/x-flv',
+    'video/mp4',
+    'video/MP2T',
+    'video/3gpp',
+    'video/quicktime',
+    'video/x-msvideo',
+    'video/x-ms-wmv',
+    'image/jpeg',
+    'image/png',
+  ],
+  sizeLimitInMB: 500,
+};
 
 // Table names
 export const TABLE_NAMES = {
   USER: 'users',
-  CATEGORY: 'categories',
+  POST: 'posts',
+  COMMENT: 'comments',
+  EVENT: 'events',
+  LEGAL_PERSON: 'legalpersons',
+  PHYSICAL_PERSON: 'physicalpersons',
+  MATERIAL: 'materials',
   PRODUCT: 'products',
-  COUNTOUR_MAP: 'countourmaps',
-  COURSE: 'courses',
-  VIDEO: 'videos',
   FILE: 'files',
-  USER_CERTIFICATE: 'usercertificates',
-  USER_PROGRESS: 'userprogresses',
+  REPLIED_TO: 'repliedtos',
   USER_TOKEN: 'usertokens',
+  ADVERTISEMENT: 'advertisements',
+  DIDACTIC_MATERIAL: 'didacticmaterials',
+  MEMORIAL_MATERIAL: 'memorialmaterials',
+  RATING: 'ratings',
+  SAVED_POST: 'savedposts',
+  SPONSOR: 'sponsors',
 };

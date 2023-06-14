@@ -7,25 +7,21 @@ import logger from '../logger.js';
 import maildevConfig from '../mail/maildev.js';
 import mongoConfig from '../mongo.js';
 import s3rverConfig from '../S3/s3rver.js';
-import shutdownServer from './shutdownServer.js';
+import setGracefulShutdown from './setGracefulShutdown.js';
 
 export default async function startServer() {
   try {
-    let s3rverConnection;
-    let maildevConnection;
     if (isDevEnvironment) {
-      s3rverConnection = await s3rverConfig();
-      maildevConnection = await maildevConfig();
+      await s3rverConfig();
+      await maildevConfig();
     }
 
     const databaseConnection = await mongoConfig();
     const serverConnection = await expressConfig();
 
-    shutdownServer({
+    setGracefulShutdown({
       serverConnection,
       databaseConnection,
-      s3rverConnection,
-      maildevConnection,
     });
   } catch (err) {
     logger.error(err, 'App exited with failure');
