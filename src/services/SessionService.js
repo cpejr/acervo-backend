@@ -92,5 +92,3 @@ export async function processRefreshToken(token) {
 export async function deleteUserToken(token) {
   return UserSessionTokenModel.findOneAndDelete({ token }).exec();
 }
-
-// Testing Commit
