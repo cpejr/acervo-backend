@@ -1,5 +1,10 @@
 {
   "name": "acervo-backend",
+  "author": "CPE",
+  "license": "ISC",
+  "version": "1.0.0",
+  "description": "Backend do projeto Acervo Cultural",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "dev": "npx env-cmd -f .env.development nodemon --watch src src/index.js",
