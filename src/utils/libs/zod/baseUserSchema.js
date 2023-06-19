@@ -32,6 +32,10 @@ export const createUserSchema = z.object({
   email: z
     .string({ required_error: 'Email is required' })
     .email('User email must be valid'),
+  password: z
+    .string({ required_error: 'Password is required' })
+    .min(6, 'Password must be atleast 3 characters')
+    .max(16, 'Password must be a maximum of 30 characters'),
   phone: z
     .string()
     .length(11, 'Phone must be exactly 11 characters long')
@@ -88,6 +92,11 @@ export const updateUserSchema = z.object({
     .max(10, 'Username must be a maximum of 10 characters')
     .optional(),
   email: z.string().email('User email must be valid').optional(),
+  password: z
+    .string()
+    .min(6, 'User password must be atleast 3 characters')
+    .max(16, 'User password must be a maximum of 30 characters')
+    .optional(),
   phone: z
     .string()
     .length(11, 'Phone must be exactly 11 characters long')
