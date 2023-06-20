@@ -1,6 +1,8 @@
+import * as EmailHandler from '../mail/handlers.js';
 import * as LegalPersonService from '../services/LegalPersonService.js';
 import asyncHandler from '../utils/general/asyncHandler.js';
 import { SUCCESS_CODES } from '../utils/general/constants.js';
+import { pwdJwts } from '../utils/libs/jwt.js';
 import * as LegalPersonValidator from '../validators/LegalPersonValidator.js';
 
 export const get = asyncHandler(async (req, res) => {
@@ -21,7 +23,10 @@ export const create = asyncHandler(async (req, res) => {
   const inputData = LegalPersonValidator.create(req);
   const newUser = await LegalPersonService.create(inputData);
 
-  res.status(SUCCESS_CODES.CREATED).json(newUser);
+  const token = pwdJwts(newUser._id);
+  await EmailHandler.confirmEmail(token, newUser);
+
+  res.status(SUCCESS_CODES.CREATED).json(newUser, token);
 });
 
 export const update = asyncHandler(async (req, res) => {

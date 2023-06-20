@@ -1,6 +1,9 @@
+/* eslint-disable import/prefer-default-export */
 import { html } from 'code-tag';
 
-import Email from '../config/mail/nodemailer.js';
+// import Email from '../config/mail/nodemailer.js';
+import sendEmail from '../config/mail/nodemailer.js';
+import template from './template.js';
 // import template from './template.js';
 
 // eslint-disable-next-line import/prefer-default-export
