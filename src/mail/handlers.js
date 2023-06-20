@@ -20,23 +20,29 @@ import template from './template.js';
 //   return Email.sendEmail(mailOptions);
 // }
 
-export function confirmEmail({ token, user }) {
+export function confirmEmail({ token }) {
   const body = html`
+    <h1>Verifique o seu email!</h1>
     <p>
-      Confirme seu email clicando
+      Estamos quase lá! Confirme o seu email para ter acesso à sua conta
       <a
         href="${`${
           process.env.FRONTEND_URL
         }/email-confirmado/${encodeURIComponent(token)}`}"
-        >aqui</a
+        >Confirmar email.</a
       >
     </p>
+    <h3>Se você não solicitou esta confirmação, por favor ignore esse email</h3>
   `;
 
   const mailOptions = {
     to: process.env.EMAIL_TO,
     subject: '[Acervo Cultural] - Confirmação de email',
-    text: `Confirme seu email clicando aqui`,
+    text: `
+    Verifique o seu email!
+    Estamos quase lá! Confirme o seu email para ter acesso à sua conta Confirmar email.
+    Se você não solicitou esta confirmação, por favor ignore esse email
+    `,
     html: template(body),
   };
   return sendEmail(mailOptions);
