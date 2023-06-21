@@ -38,3 +38,23 @@ export function decodeAccessToken(token) {
 export function decodePwdToken(token) {
   return jwt.verify(token, process.env.PASSWORD_TOKEN_SECRET);
 }
+
+export function signConfirmEmailJwt(userId) {
+  const emailToken = jwt.sign(
+    {
+      userId,
+    },
+    process.env.EMAIL_TOKEN_SECRET,
+    { expiresIn: +process.env.EMAIL_TOKEN_EXPIRE } // in seconds
+  );
+  return emailToken;
+}
+
+export function decodeConfirmEmailToken(token) {
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, process.env.EMAIL_TOKEN_SECRET, (err, decoded) => {
+      if (err) reject(err);
+      else resolve(decoded);
+    });
+  });
+}
