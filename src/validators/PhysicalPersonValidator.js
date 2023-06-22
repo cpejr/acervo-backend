@@ -49,14 +49,6 @@ export const create = validate(
   })
 );
 
-export const verifyEmail = validate(
-  z.object({
-    params: z.object({
-      token: z.string({ required_error: 'User email token is required' }),
-    }),
-  })
-);
-
 export const update = validate(
   z.object({
     body: z
@@ -74,7 +66,6 @@ export const update = validate(
           .min(1, 'Profession must be atleast 1 characters')
           .max(50, 'Profession must be a maximum of 50 characters')
           .optional(),
-        emailVerified: z.boolean().optional(),
       })
       .merge(updateUserSchema),
     params: z.object({

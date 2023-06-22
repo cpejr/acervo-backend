@@ -77,7 +77,7 @@ export const createUserSchema = z.object({
     .max(50, 'Observations must be a maximum of 50 characters'),
 });
 
-export const verifyEmail = validate(
+export const verifyEmailToken = validate(
   z.object({
     params: z.object({
       token: z.string({ required_error: 'User email token is required' }),

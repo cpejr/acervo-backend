@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import * as BaseUserController from '../controllers/BaseUserController.js';
+// import * as BaseUserController from '../controllers/BaseUserController.js';
 import * as PhysicalPersonController from '../controllers/PhysicalPersonController.js';
 
 const PhysicalPersonRoutes = Router();
@@ -14,6 +14,6 @@ PhysicalPersonRoutes.route('/:_id')
   .put(PhysicalPersonController.update)
   .delete(PhysicalPersonController.destroy);
 
-PhysicalPersonRoutes.put('/:token', BaseUserController.verifyEmail);
+PhysicalPersonRoutes.put('/:token', PhysicalPersonController.verifyEmail);
 
 export default PhysicalPersonRoutes;

@@ -91,14 +91,6 @@ export const create = validate(
   })
 );
 
-export const verifyEmail = validate(
-  z.object({
-    params: z.object({
-      token: z.string({ required_error: 'User email token is required' }),
-    }),
-  })
-);
-
 export const update = validate(
   z.object({
     body: z

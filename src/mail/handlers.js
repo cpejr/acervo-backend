@@ -29,7 +29,7 @@ export function confirmEmail({ token }) {
         href="${`${
           process.env.FRONTEND_URL
         }/email-confirmado/${encodeURIComponent(token)}`}"
-        >Confirmar email</a
+        >Confirmar email.</a
       >
     </p>
     <h3>Se você não solicitou esta confirmação, por favor ignore esse email</h3>
@@ -40,7 +40,7 @@ export function confirmEmail({ token }) {
     subject: '[Acervo Cultural] - Confirmação de email',
     text: `
     Verifique o seu email!
-    Estamos quase lá! Confirme o seu email para ter acesso à sua conta Confirmar email
+    Estamos quase lá! Confirme o seu email para ter acesso à sua conta Confirmar email.
     Se você não solicitou esta confirmação, por favor ignore esse email
     `,
     html: template(body),
