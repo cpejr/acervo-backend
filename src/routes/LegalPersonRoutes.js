@@ -14,6 +14,9 @@ LegalPersonRoutes.route('/:_id')
   .put(LegalPersonController.update)
   .delete(LegalPersonController.destroy);
 
-LegalPersonRoutes.put('/:token', LegalPersonController.verifyEmail);
+LegalPersonRoutes.put(
+  '/confirm-email/:token',
+  LegalPersonController.verifyEmail
+);
 
 export default LegalPersonRoutes;
