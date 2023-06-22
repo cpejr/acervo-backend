@@ -14,6 +14,9 @@ PhysicalPersonRoutes.route('/:_id')
   .put(PhysicalPersonController.update)
   .delete(PhysicalPersonController.destroy);
 
-PhysicalPersonRoutes.put('/:token', PhysicalPersonController.verifyEmail);
+PhysicalPersonRoutes.put(
+  '/confirm-email/:token',
+  PhysicalPersonController.verifyEmail
+);
 
 export default PhysicalPersonRoutes;
