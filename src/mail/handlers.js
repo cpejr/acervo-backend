@@ -1,26 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 import { html } from 'code-tag';
 
-// import Email from '../config/mail/nodemailer.js';
 import sendEmail from '../config/mail/nodemailer.js';
 import template from './template.js';
-// import template from './template.js';
 
-// eslint-disable-next-line import/prefer-default-export
-// export function editMe(inputData) {
-//   const body = html``;
-
-//   const mailOptions = {
-//     to: process.env.EMAIL_TO,
-//     subject: '',
-//     text: ``,
-//     html: template(body),
-//   };
-
-//   return Email.sendEmail(mailOptions);
-// }
-
-export function confirmEmail({ token }) {
+export function confirmEmail({ user, token }) {
   const body = html`
     <h1>Verifique o seu email!</h1>
     <p>
@@ -36,7 +20,7 @@ export function confirmEmail({ token }) {
   `;
 
   const mailOptions = {
-    to: process.env.EMAIL_TO,
+    to: user.email,
     subject: '[Acervo Cultural] - Confirmação de email',
     text: `
     Verifique o seu email!
