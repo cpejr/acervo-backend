@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+import validate from '../../../validators/validate.js';
 import objectIdSchema from './objectIdSchema.js';
 
 export const getUserSchema = z.object({
@@ -32,6 +33,7 @@ export const createUserSchema = z.object({
   email: z
     .string({ required_error: 'Email is required' })
     .email('User email must be valid'),
+  emailVerified: z.boolean().default(false),
   password: z
     .string({ required_error: 'Password is required' })
     .min(6, 'Password must be atleast 3 characters')
@@ -77,8 +79,15 @@ export const createUserSchema = z.object({
     .string()
     .min(1, 'Observations must be atleast 1 characters')
     .max(50, 'Observations must be a maximum of 50 characters'),
-  emailVerified: z.boolean().default(false),
 });
+
+export const verifyEmailToken = validate(
+  z.object({
+    params: z.object({
+      token: z.string({ required_error: 'User email token is required' }),
+    }),
+  })
+);
 
 export const updateUserSchema = z.object({
   name: z

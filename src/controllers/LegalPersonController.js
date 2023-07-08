@@ -1,6 +1,12 @@
+import * as EmailHandler from '../mail/handlers.js';
 import * as LegalPersonService from '../services/LegalPersonService.js';
 import asyncHandler from '../utils/general/asyncHandler.js';
 import { SUCCESS_CODES } from '../utils/general/constants.js';
+import {
+  decodeConfirmEmailToken,
+  signConfirmEmailJwt,
+} from '../utils/libs/jwt.js';
+import { verifyEmailToken } from '../utils/libs/zod/baseUserSchema.js';
 import * as LegalPersonValidator from '../validators/LegalPersonValidator.js';
 
 export const get = asyncHandler(async (req, res) => {
@@ -21,7 +27,22 @@ export const create = asyncHandler(async (req, res) => {
   const inputData = LegalPersonValidator.create(req);
   const newUser = await LegalPersonService.create(inputData);
 
-  res.status(SUCCESS_CODES.CREATED).json(newUser);
+  const token = signConfirmEmailJwt(newUser._id);
+  await EmailHandler.confirmEmail({ user: newUser, token });
+
+  res.status(SUCCESS_CODES.CREATED).json(newUser, token);
+});
+
+export const verifyEmail = asyncHandler(async (req, res) => {
+  const { token } = verifyEmailToken(req);
+  const { userId } = await decodeConfirmEmailToken(token);
+
+  const updatedUser = await LegalPersonService.update({
+    _id: userId,
+    inputData: { emailVerified: true },
+  });
+
+  res.status(SUCCESS_CODES.OK).json(updatedUser.name);
 });
 
 export const update = asyncHandler(async (req, res) => {
